@@ -20,3 +20,23 @@ git_repository(
 load("//rules_android/robolectric-extension:robolectric-workspace.bzl", "robolectric_jars")
 
 robolectric_jars()
+
+# For local development with Robolectric.
+new_local_repository(
+    name = "local_robolectric_3_1_2",
+    build_file_content = """
+java_import(
+  name = "jars",
+  jars = [
+    "//:robolectric/build/libs/robolectric-3.1.2.jar",
+    "//:robolectric-annotations/build/libs/robolectric-annotations-3.1.2.jar",
+    "//:robolectric-processor/build/libs/robolectric-processor-3.1.2.jar",
+    "//:robolectric-utils/build/libs/robolectric-utils-3.1.2.jar",
+    "//:robolectric-resources/build/libs/robolectric-resources-3.1.2.jar",
+    "//:build/libs/robolectric-3.1.2.jar",
+  ],
+  visibility = ["//visibility:public"],
+)
+""",
+    path = "/usr/local/google/home/vnayar/projects/robolectric",
+)
