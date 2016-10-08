@@ -9,7 +9,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = "src/main/AndroidManifest.xml", resourceDir = "src/main/res", sdk = 21)
+@Config(manifest = "src/main/java/com/example/activity/AndroidManifest.xml", sdk = 21)
 public class DeckardActivityTest {
 
     @Test
