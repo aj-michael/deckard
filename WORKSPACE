@@ -1,5 +1,4 @@
-# TODO(vnayar): Many of these rules may need to be migrated into the Android Robolectric Skylark extension.
-
+# Setup for the android_library() and android_binary() rules.
 android_sdk_repository(
     name = "androidsdk",
     # Replace with the Android SDK API level
@@ -10,33 +9,13 @@ android_sdk_repository(
     path = "/usr/local/google/home/vnayar/Android/Sdk",
 )
 
+# Setup for the Bazel extension created robolectric_test() rule.
 git_repository(
     name = "io_bazel_rules_android",
-    commit = "4477aabc2d99554d17be2833de2a272472b48f76",
+    commit = "af05a9d563124a83a9a738eacf82461902230e08",
     remote = "https://github.com/vnayar/rules_android.git",
 )
 
-#load("@io_bazel_rules_android//robolectric-extension:robolectric-workspace.bzl", "robolectric_jars")
-load("//rules_android/robolectric-extension:robolectric-workspace.bzl", "robolectric_jars")
+load("@io_bazel_rules_android//:robolectric-workspace.bzl", "robolectric_jars")
 
 robolectric_jars()
-
-# For local development with Robolectric.
-new_local_repository(
-    name = "local_robolectric_3_1_2",
-    build_file_content = """
-java_import(
-  name = "jars",
-  jars = [
-    "//:robolectric/build/libs/robolectric-3.1.2.jar",
-    "//:robolectric-annotations/build/libs/robolectric-annotations-3.1.2.jar",
-    "//:robolectric-processor/build/libs/robolectric-processor-3.1.2.jar",
-    "//:robolectric-utils/build/libs/robolectric-utils-3.1.2.jar",
-    "//:robolectric-resources/build/libs/robolectric-resources-3.1.2.jar",
-    "//:build/libs/robolectric-3.1.2.jar",
-  ],
-  visibility = ["//visibility:public"],
-)
-""",
-    path = "/usr/local/google/home/vnayar/projects/robolectric",
-)
